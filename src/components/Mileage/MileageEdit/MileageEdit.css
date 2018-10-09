@@ -1,0 +1,47 @@
+.background {
+    background-image:url(../../../assets/images/luis-reynoso-502315-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    height: 100%;
+}
+
+.mileageEditclass {
+    display:grid;
+    grid-row-gap: 1em;
+    width: 60%;
+    background-color: ghostwhite;
+    position: fixed;
+    top: 2em;
+    margin-left: 20%;
+    margin-right: auto;
+    border: 2px solid black;
+    padding-top: 2em;
+}
+
+.mileageEditclass label {
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mileageEditclass input{
+    text-align: center;
+    display: block;
+    width: auto;
+    box-sizing: border-box;
+    border: 1px dashed black;
+    font-size: 1.2em;
+    margin: auto;
+    background-color: lightgray;
+}
+
+
+
+
+
+.confirmation {
+    display: grid;
+    grid-auto-flow: column;
+    height: 6em;
+}

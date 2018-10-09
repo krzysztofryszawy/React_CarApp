@@ -1,0 +1,11 @@
+.Editor {
+    position: fixed;
+    z-index: 500;
+    background-color: whitesmoke;
+    width: 100%;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    transition: .4s ease-out;
+    height: 100%;
+    }

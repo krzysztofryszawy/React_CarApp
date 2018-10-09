@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+    font-size: 18px;
+        background-color: whitesmoke;
+    /* Background pattern from Subtle Patterns */
+    background-image:url(./assets/images/alessio-lin-208193-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+/*    background-image:url(./assets/images/swirl_pattern.png);*/
+    font-family: 'Montserrat', sans-serif;
+}

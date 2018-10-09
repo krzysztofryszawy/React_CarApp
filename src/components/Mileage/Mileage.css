@@ -1,0 +1,42 @@
+.Mileage {
+    margin: 0;
+    border: 1px dotted gainsboro;
+    background-color: ghostwhite;
+    cursor: pointer;
+    display: grid;
+    grid-auto-flow: column;
+
+}
+
+.Mileage:hover {
+    transform: scale(1.02);
+            background-color: white;
+
+}
+
+.Mileage p {
+    margin: 0;
+    padding: 1em;
+}
+
+
+.above {
+        z-index: 100;
+    position: relative;
+}
+
+.Mileage:hover {
+    transform: scale(1.02);
+        background-color: white;
+
+}
+
+
+
+.warning {
+    background-color: firebrick;
+}
+
+.warning:hover {
+    background-color: indianred;
+}

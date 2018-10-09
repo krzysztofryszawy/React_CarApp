@@ -1,0 +1,30 @@
+.createCarclass {
+    display:grid;
+    grid-row-gap: 1em;
+    background-color: ghostwhite;
+    margin-top: 2em;
+}
+
+.createCarclass label {
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.createCarclass input{
+    text-align: center;
+    display: block;
+    width: auto;
+    box-sizing: border-box;
+    border: 1px dashed black;
+    font-size: 1.2em;
+    margin: auto;
+    background-color: lightgray;
+}
+
+
+.confirmation {
+    display: grid;
+    grid-auto-flow: column;
+    height: 6em;
+}

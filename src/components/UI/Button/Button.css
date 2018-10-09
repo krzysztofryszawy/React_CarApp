@@ -1,0 +1,33 @@
+.Button {
+    border: none;
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+    font-size: .8em;
+    height: inherit;
+}
+
+.Button:first-of-type {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.Proceed {
+    background-color: darkolivegreen;
+    cursor: pointer;
+}
+
+.Cancel {
+    background-color: darkred;
+    cursor: pointer;
+}
+
+.Proceed:hover {
+    background-color: yellowgreen;
+}
+
+.Cancel:hover {
+    background-color: red
+}
+

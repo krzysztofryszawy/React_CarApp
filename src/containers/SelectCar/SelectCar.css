@@ -1,0 +1,5 @@
+.confirmation {
+    display: grid;
+    grid-auto-flow: column;
+    height: 6em;
+}

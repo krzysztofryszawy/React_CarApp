@@ -1,0 +1,55 @@
+.CarApp {
+    background-color: ghostwhite;
+    text-align: center;
+    user-select: none;
+    width: 60%;
+    max-width: 700px;
+    margin-left: 20%;
+    margin-right: auto;
+    margin-top: 2em;
+    border: 2px solid black;
+    box-shadow: 10px 10px 30px 5px rgba(0,0,0,0.9);
+    
+}
+
+.CarApp ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.CarApp li {
+    display: inline-block;
+    margin: 20px;
+}
+
+.CarApp a {
+    text-decoration: none;
+    color: black;
+    padding: 1em;
+    
+}
+
+.CarApp a:hover,
+.CarApp a:active,
+.CarApp a.active{
+    color: darkorange;
+}
+
+p {
+    padding: .5em;
+}
+
+.confirmation {
+    display: grid;
+    grid-auto-flow: column;
+    height: 6em;
+}
+
+@media (max-width: 700px) {
+    .CarApp {width: 100%;
+        margin: 0;
+    }
+}

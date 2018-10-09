@@ -1,0 +1,29 @@
+.inspection {
+    margin: 0;
+    border: 1px dotted gainsboro;
+    cursor: pointer;
+    display: grid;
+    grid-auto-flow: column;
+/*    height: 150px;*/
+    background-color: ghostwhite;
+}
+
+.above {
+        z-index: 100;
+    position: relative;
+}
+
+.inspection:hover {
+    transform: scale(1.02);
+        background-color: white;
+
+}
+
+
+.warning {
+    background-color: firebrick;
+}
+
+.warning:hover {
+    background-color: indianred;
+}
