@@ -97,7 +97,7 @@ class CarApp extends Component {
     
     
     
-    maintenanceCarHandler = () => {
+    switchMaintenanceCarHandler = () => {
         this.setState({carSelecting: !this.state.carSelecting})
     }
 
@@ -247,7 +247,7 @@ class CarApp extends Component {
     
     
     //definicja okna dialogowego do edycji aktywnego komponentu
-    let editor =                 <Editor/>
+    let editor = <Editor/>
     if (this.state.editing) {
         editor = (
                 <Editor show={this.state.editing}>
@@ -281,15 +281,14 @@ class CarApp extends Component {
                             {backdrop}
                             {editor}
                             
-                            <Button btnType='Proceed' clicked={this.maintenanceCarHandler}> ⬅ WRÓĆ</Button>
+                            <Button btnType='Proceed' clicked={this.switchMaintenanceCarHandler}> ⬅ WRÓĆ</Button>
                     </div>
     )
     
 //przełączanie miedzy dodawaniem samochodu a obsługą
     if (this.state.carSelecting) {
         appContent = <SelectCar
-                        setCarHandler={this.setCarHandler}
-                        maintenanceCarHandler={this.maintenanceCarHandler}/>
+                        setCarHandler={this.setCarHandler}/>
     }
     
 //obsługa błędu przy pobieraniu state przez loadCarHandler

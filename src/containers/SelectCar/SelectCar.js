@@ -17,7 +17,9 @@ import CreateCar from './CreateCar/CreateCar'
 
 class selectCar extends Component {
 
-     state = {
+    componentIsMounted = false;
+
+    state = {
         allCars: [],
         loading: false,
         error: false,
@@ -26,27 +28,29 @@ class selectCar extends Component {
     
 
     componentDidMount () {
+        this.componentIsMounted = true;
         this.setState({loading:true})
         axios.get('allCars.json')
             .then(response => {
-                this.setState({allCars: response.data, loading:false})
+                if (this.componentIsMounted) {
+                        this.setState({allCars: response.data, loading:false})
+                }
             })
             .catch(error => {
-                    this.setState({loading:false})
-
+                this.setState({loading:false})
         })
     }
 
+    componentWillUnmount() {
+        this.componentIsMounted = false;
+    }
 
 
     render () {
     let createCar
     let button
     
-    //USUNĄĆ TĘ METODĘ POŚREDNIĄ jest nadmiarowa!!!!
-    const callSetCar = (carName) => {
-        this.props.setCarHandler(carName)
-    }
+
     
 
     const createCarSwitcher = () => {
@@ -56,15 +60,16 @@ class selectCar extends Component {
     let cars = <Spinner/>
         
     if (!this.state.loading) {
+
         cars = this.state.allCars.map(car => {
             return (
                     <SingleCar 
-                        key={car.id}
-                        id={car.id}
+                        key={car.regNumber}
+                        regNumber={car.regNumber}
                         name={car.name}
                         brand={car.brand}
                         vin={car.vin}
-                        clicked={() => callSetCar(car.name)}/>           
+                        clicked={() => this.props.setCarHandler(car.name)}/>           
         )
     })
     
@@ -81,7 +86,6 @@ class selectCar extends Component {
         button = null
         createCar = (<div>
                         <CreateCar createCarSwitcher={createCarSwitcher}/>
-
                     </div>
         )
     }
