@@ -24,6 +24,7 @@ class selectCar extends Component {
         loading: false,
         error: false,
         carCreating: false,
+        shouldReload:false,
     }
     
 
@@ -46,11 +47,34 @@ class selectCar extends Component {
     }
 
 
+// jeśli reloadTrigger ustawił shouldReload:true to wczytujemy nową bazę
+    componentDidUpdate () {
+        if (this.state.shouldReload) {
+                this.setState({shouldReload:false})
+                this.setState({loading:true})
+                axios.get('allCars.json')
+                    .then(response => {
+                        if (this.componentIsMounted) {
+                                this.setState({allCars: response.data, loading:false})
+                        }
+                    })
+                    .catch(error => {
+                        this.setState({loading:false})
+                })
+        }
+    }
+
+
     render () {
     let createCar
     let button
     
-
+// wczytujemy nową bazę tylko jeśli dodano nowy obiekt do bazy - callback w CreateCar
+    let reloadTrigger = (decision) => {
+        if (decision) {
+            this.setState({shouldReload:true})
+        }
+    }
     
 
     const createCarSwitcher = () => {
@@ -70,22 +94,21 @@ class selectCar extends Component {
                         brand={car.brand}
                         vin={car.vin}
                         clicked={() => this.props.setCarHandler(car.name)}/>           
-        )
-    })
-    
+            )
+        })
         button = (
                     <div className={classes.confirmation} style={{height: '4em'}}>
                         <Button btnType='Proceed' clicked={createCarSwitcher}>DODAJ NOWY POJAZD</Button>
                     </div>
         )
-    
     }
-     
+        
+    
     if (this.state.carCreating) {
         cars = null
         button = null
         createCar = (<div>
-                        <CreateCar createCarSwitcher={createCarSwitcher}/>
+                        <CreateCar reloadTrigger={reloadTrigger} createCarSwitcher={createCarSwitcher}/>
                     </div>
         )
     }

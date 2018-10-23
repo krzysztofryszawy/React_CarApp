@@ -12,7 +12,8 @@ class createCar extends Component {
 
 
     render () {
-
+        
+    
         const changeState = (e) => {
             const key = e.target.name
             this.setState({[key]: e.target.value})
@@ -41,31 +42,33 @@ class createCar extends Component {
                 }
 
                 
-             let newCar = {regNumber: this.state.regNumber, name: databaseCarName, brand: this.state.name, vin:this.state.vin}
+                let newCar = {regNumber: this.state.regNumber, name: databaseCarName, brand: this.state.name, vin:this.state.vin}
             
-             axios.get('allCars.json')
-                .then(response => {
-                    let currentCars = response
-                    let modifiedCars = ([...currentCars.data])
-                    modifiedCars.push(newCar)
-                    this.setState({modifiedCars: modifiedCars})
-//                    console.log(modifiedCars)
-            })
+                 axios.get('allCars.json')
+                    .then(response => {
+                        let currentCars = response
+                        let modifiedCars = ([...currentCars.data])
+                        modifiedCars.push(newCar)
+                        this.setState({modifiedCars: modifiedCars}, () => saveModifiedCars())
+                
+                })
              
-             
+                let saveModifiedCars = () => {
+                    axios.put('/allCars.json', this.state.modifiedCars)
+                           .then(response => {
+                                console.log(response)
+                                this.props.createCarSwitcher()
+                                this.props.reloadTrigger(true)
+                            })
+                            .catch(error => {
+                                console.log(error)
+                            });
+                }
 
 
-
-console.log(this.state)
-//                axios.post('/allCars.json', newCar)
-//                       .then(response => {
-//                            console.log(response)
-//                        })
-//                        .catch(error => {
-//                            console.log(error)
-//                        });
+//             
 //
-//                
+////                
 //             
 //             
 //
@@ -78,6 +81,10 @@ console.log(this.state)
             }        
 
 
+         
+         
+         
+         
             let content = ( <div className={classes.createCarclass}>
                                 <div>
                                     <label>numer rejestracji</label>
