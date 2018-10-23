@@ -50,6 +50,7 @@ class selectCar extends Component {
 // jeśli reloadTrigger ustawił shouldReload:true to wczytujemy nową bazę
     componentDidUpdate () {
         if (this.state.shouldReload) {
+                this.componentIsMounted = true;
                 this.setState({shouldReload:false})
                 this.setState({loading:true})
                 axios.get('allCars.json')
@@ -90,10 +91,10 @@ class selectCar extends Component {
                     <SingleCar 
                         key={car.regNumber}
                         regNumber={car.regNumber}
-                        name={car.name}
+                        jsonName={car.jsonName}
                         brand={car.brand}
                         vin={car.vin}
-                        clicked={() => this.props.setCarHandler(car.name)}/>           
+                        clicked={() => this.props.setCarHandler(car.jsonName)}/>           
             )
         })
         button = (

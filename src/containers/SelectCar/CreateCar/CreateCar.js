@@ -28,7 +28,7 @@ class createCar extends Component {
                     databaseCarName: databaseCarName, //jest
                     vin: this.state.vin,//jest
                     productionYear: this.state.productionYear,//jest
-                    name: this.state.name,//jest
+                    brand: this.state.brand,//jest
                     regNumber: this.state.regNumber,//jest
                     timingbeltChangeDate: this.state.timingbeltChangeDate,//jest
                     mileage: this.state.mileage,//jest
@@ -42,7 +42,7 @@ class createCar extends Component {
                 }
 
                 
-                let newCar = {regNumber: this.state.regNumber, name: databaseCarName, brand: this.state.name, vin:this.state.vin}
+                let newCar = {regNumber: this.state.regNumber, jsonName: databaseCarName, brand: this.state.brand, vin:this.state.vin}
             
                  axios.get('allCars.json')
                     .then(response => {
@@ -90,11 +90,11 @@ class createCar extends Component {
             let content = ( <div className={classes.createCarclass}>
                                 <div>
                                     <label>numer rejestracji</label>
-                                    <input name="regNumber"  type="text"  onChange={changeState}/>
+                                    <input name="regNumber" type="text" onChange={changeState}/>
                                 </div>
                                 <div>
                                     <label>marka</label>
-                                    <input name="name"  type="text"  onChange={changeState}/>
+                                    <input name="brand"  type="text"  onChange={changeState}/>
                                 </div>
                                 <div>
                                     <label>numer VIN</label>

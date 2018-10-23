@@ -12,7 +12,7 @@ const mainInfo = (props) => {
             <h3>nr rejestracyjny: {props.regNumber}</h3>
             <h3>VIN: {props.vin}</h3>
             <div>
-                <h3>Samochód ma {howOld} lat</h3>
+                <h3>Wiek samochodu(lata): {howOld}</h3>
             </div>
         </article>
     )

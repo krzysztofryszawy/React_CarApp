@@ -1,17 +1,21 @@
 .Button {
-    border: none;
+    border: 4px solid white;
+    border-radius: 15px;
     color: white;
     cursor: pointer;
     font: inherit;
     font-weight: bold;
     font-size: .8em;
     height: inherit;
+    text-align: center;
 }
 
+/*
 .Button:first-of-type {
     margin-left: 0;
     padding-left: 0;
 }
+*/
 
 .Proceed {
     background-color: darkolivegreen;

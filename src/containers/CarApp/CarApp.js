@@ -47,6 +47,9 @@ class CarApp extends Component {
             isOilActive: false,
             networkError: false,
             loading: false,
+            showMileageComponent: true,
+            showInspectionComponent: true,
+            showOilComponent: true,
     }
 
 
@@ -70,10 +73,10 @@ class CarApp extends Component {
 
 
 
-//carName przekazany callbackiem z komponentu SelectCar
-    setCarHandler = (carName) => {
-        if (this.state.databaseCarName!==carName) {
-            this.setState({databaseCarName: carName}, this.loadCarHandler)
+//jsonName przekazany callbackiem z komponentu SelectCar
+    setCarHandler = (jsonName) => {
+        if (this.state.databaseCarName!==jsonName) {
+            this.setState({databaseCarName: jsonName}, this.loadCarHandler)
         }
         else {
             this.setState({carSelecting: false})
@@ -96,7 +99,7 @@ class CarApp extends Component {
     
     
     
-    
+//przełącza między trybem wyboru auta i zarządzaniem
     switchMaintenanceCarHandler = () => {
         this.setState({carSelecting: !this.state.carSelecting})
     }
@@ -221,30 +224,36 @@ class CarApp extends Component {
     let backdrop = <Backdrop show={this.state.isActive} clicked={() => 
                 this.setState({isActive:false, isInspectionActive:false, isMileageActive:false, isOilActive: false})}/>
     
-    let mileage = <Mileage 
+    
+    let mileage = this.state.showMileageComponent ?  <Mileage 
                         click={this.switchActiveMileageHandler}
                         active={this.state.isMileageActive} 
                         changeMileageHandler={this.changeMileageHandler}
-                        currentMileage={this.state.mileage}/>
+                        currentMileage={this.state.mileage}
+                        /> : null
 
     
-    let inspection = <Inspection
+    let inspection = this.state.showInspectionComponent ? <Inspection
                         click={this.switchActiveInspectionHandler}
                         active={this.state.isInspectionActive} 
                         changeInspectionDateHandler={this.changeInspectionDateHandler}
                         currentMileage={this.state.mileage}
-                        lastInspectionDate={this.state.lastInspectionDate}/>
+                        lastInspectionDate={this.state.lastInspectionDate}/> : null
         
-    let oil = <Oil
+    let oil = this.state.showOilComponent ? <Oil
                         click={this.switchActiveOilHandler}
                         active={this.state.isOilActive}
                         changeOilDateHandler={this.changeOilDateHandler}
                         currentMileage={this.state.mileage}
                         lastOilChangeDate={this.state.lastOilChangeDate}
-                        lastOilChangeMileage={this.state.lastOilChangeMileage}/>
+                        lastOilChangeMileage={this.state.lastOilChangeMileage}/> : null
 
     
-    
+    let switchAppButton = (
+                    <div className={classes.confirmation} style={{height: '4em'}}>
+                        <Button btnType='Proceed' clicked={this.switchMaintenanceCarHandler}> ⬅ WRÓĆ</Button>
+                    </div>
+                    )
     
     //definicja okna dialogowego do edycji aktywnego komponentu
     let editor = <Editor/>
@@ -256,7 +265,9 @@ class CarApp extends Component {
             )
     }
         
-
+        
+    
+        
     let appContent = (
                     <div>
 
@@ -265,6 +276,9 @@ class CarApp extends Component {
                                     <ul>
                                         <li>Option 1</li>
                                         <li>Option 2</li>
+                                        <Button btnType='Cancel' clicked={() => this.setState({showMileageComponent: !this.state.showMileageComponent})}> ↩ </Button>
+                                        <Button btnType='Cancel' clicked={() => this.setState({showInspectionComponent: !this.state.showInspectionComponent})}> ↩ </Button>
+                                        <Button btnType='Cancel' clicked={() => this.setState({showOilComponent: !this.state.showOilComponent})}> ↩ </Button>
                                     </ul>
                                 </nav>
                             </header>
@@ -280,8 +294,8 @@ class CarApp extends Component {
                             {oil}
                             {backdrop}
                             {editor}
-                            
-                            <Button btnType='Proceed' clicked={this.switchMaintenanceCarHandler}> ⬅ WRÓĆ</Button>
+                            {switchAppButton}
+
                     </div>
     )
     
