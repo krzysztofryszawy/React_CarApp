@@ -1,4 +1,5 @@
 .Button {
+    outline:none;
     border: 4px solid white;
     border-radius: 15px;
     color: white;
@@ -8,6 +9,8 @@
     font-size: .8em;
     height: inherit;
     text-align: center;
+    min-height: 2em;
+    padding: .5em;
 }
 
 /*
@@ -21,17 +24,22 @@
     background-color: darkolivegreen;
     cursor: pointer;
 }
+.Proceed:hover {
+    background-color: yellowgreen;
+}
 
 .Cancel {
     background-color: darkred;
     cursor: pointer;
 }
-
-.Proceed:hover {
-    background-color: yellowgreen;
-}
-
 .Cancel:hover {
     background-color: red
 }
 
+.Disabled {
+    background-color: lightgray;
+    cursor: pointer;
+}
+.Disabled:hover {
+    background-color: gray;
+}

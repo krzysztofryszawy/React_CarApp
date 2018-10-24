@@ -17,6 +17,7 @@ import OilEdit from '../../components/Oil/OilEdit/OilEdit';
 
 import SelectCar from '../SelectCar/SelectCar';
 import Button from '../../components/UI/Button/Button'
+import Settings from '../../components/Settings/Settings'
 
 
 
@@ -47,9 +48,14 @@ class CarApp extends Component {
             isOilActive: false,
             networkError: false,
             loading: false,
+            showSettings: false,
             showMileageComponent: true,
             showInspectionComponent: true,
             showOilComponent: true,
+            showTimingbeltComponent: true,
+            showInsuranceComponent: true,
+            showAirconditionComponent: true,
+            showTiresComponent: true,
     }
 
 
@@ -125,7 +131,11 @@ class CarApp extends Component {
                 tires: this.state.tires,
                 showMileageComponent: this.state.showMileageComponent,
                 showInspectionComponent: this.state.showInspectionComponent,
-                showOilComponent: this.state.showOilComponent
+                showOilComponent: this.state.showOilComponent,
+                showTimingbeltComponent: this.state.showTimingbeltComponent,
+                showInsuranceComponent: this.state.showInsuranceComponent,
+                showAirconditionComponent: this.state.showAirconditionComponent,
+                showTiresComponent: this.state.showTiresComponent,
             }
             
             this.setState({loading:true})
@@ -225,7 +235,7 @@ class CarApp extends Component {
     let backdrop = <Backdrop show={this.state.isActive} clicked={() => 
                 this.setState({isActive:false, isInspectionActive:false, isMileageActive:false, isOilActive: false})}/>
     
-// props passed to component
+// props passed to component. checking if user set in settings that component should be visible (showMileageComponent?)
     let mileage = this.state.showMileageComponent ?  <Mileage 
                         click={this.switchActiveMileageHandler}
                         active={this.state.isMileageActive} 
@@ -266,7 +276,33 @@ class CarApp extends Component {
                 )
         }
         
-        
+// content for settings, passed to component Settings as props.children
+    let settingsContent = (
+        <Settings >
+            <Button btnType={this.state.showMileageComponent ? 'Proceed' : 'Disabled'} 
+            clicked={() => this.setState({showMileageComponent: !this.state.showMileageComponent},this.updateCarHandler)}> ↩ MILEAGE </Button>
+            
+            <Button btnType={this.state.showInspectionComponent ? 'Proceed' : 'Disabled'}  
+            clicked={() => this.setState({showInspectionComponent: !this.state.showInspectionComponent},this.updateCarHandler)}> ↩ INSPECTION </Button>
+            
+            <Button btnType={this.state.showOilComponent ? 'Proceed' : 'Disabled'}  
+            clicked={() => this.setState({showOilComponent: !this.state.showOilComponent},this.updateCarHandler)}> ↩ OIL </Button>
+            
+            <Button btnType={this.state.showTimingbeltComponent ? 'Proceed' : 'Disabled'}  
+            clicked={() => this.setState({showTimingbeltComponent: !this.state.showTimingbeltComponent},this.updateCarHandler)}> ↩ TIMING BELT </Button>
+            
+            <Button btnType={this.state.showInsuranceComponent ? 'Proceed' : 'Disabled'}  
+            clicked={() => this.setState({showInsuranceComponent: !this.state.showInsuranceComponent},this.updateCarHandler)}> ↩ INSURANCE </Button>
+            
+            <Button btnType={this.state.showAirconditionComponent ? 'Proceed' : 'Disabled'}  
+            clicked={() => this.setState({showAirconditionComponent: !this.state.showAirconditionComponent},this.updateCarHandler)}> ↩ AIRCONDITION</Button>
+            
+            <Button btnType={this.state.showTiresComponent ? 'Proceed' : 'Disabled'}  
+            clicked={() => this.setState({showTiresComponent: !this.state.showTiresComponent},this.updateCarHandler)}> ↩ TIRES </Button>
+            
+            
+       </Settings>
+    )
     
         
     let appContent = (
@@ -275,15 +311,14 @@ class CarApp extends Component {
                         <header>
                                 <nav>
                                     <ul>
-                                        <li>Option 1</li>
-                                        <li>Option 2</li>
-                                        <Button btnType='Cancel' 
-                                            clicked={() => this.setState({showMileageComponent: !this.state.showMileageComponent},this.updateCarHandler)}> ↩ </Button>
-                                        <Button btnType='Cancel' 
-                                            clicked={() => this.setState({showInspectionComponent: !this.state.showInspectionComponent},this.updateCarHandler)}> ↩ </Button>
-                                        <Button btnType='Cancel' 
-                                            clicked={() => this.setState({showOilComponent: !this.state.showOilComponent},this.updateCarHandler)}> ↩ </Button>
+                                        <li >
+                                            <Button btnType='Proceed' clicked={() => this.setState({showSettings: !this.state.showSettings})}>USTAWIENIA</Button>
+                                        </li>
+                                        <li>Option 2</li>                                        
                                     </ul>
+                                      
+                                   {this.state.showSettings ? settingsContent : null}
+                                   
                                 </nav>
                             </header>
                             <MainInfo 
