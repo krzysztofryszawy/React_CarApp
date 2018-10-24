@@ -27,7 +27,7 @@ const inspection = (props) => {
             </div>
         )
     
-    if (props.active) { // wykonuje się gdy w state jest isActive=true, aktywuje komponent
+    if (props.active) { // is executed when state isActive=true
         insp = (
             <div  className={[classes.above, classes.inspection].join(' ')}>
                     <p>{daysInspection} dni do przeglądu technicznego</p>

@@ -29,7 +29,7 @@ class OilEdit extends Component {
             this.setState({oilType: e.target.value})
         }
         
-        //callback z dwoma parametrami do ustawienia state w komponencie parent
+//callback passing two parameters to setState in carApp component
         const sendNewData = () => {
             this.props.confirm(this.state.newOilChangeDate, this.state.currentMileage, this.state.oilType)
         }
@@ -41,8 +41,10 @@ class OilEdit extends Component {
                         
                         <label>Wprowadź datę wymiany oleju</label>
                           <input type="date" value={this.state.newOilChangeDate} onChange={changeOilChangeDate} min={this.props.lastOilChangeDate} required/>
+                          
                         <label>Wprowadź przy jakim przebiegu wykonano wymianę</label>
                         <input  type="number" step="1" name="przebieg" min={this.props.currentMileage} value={this.state.currentMileage} onChange={changeMileage}/>
+                        
                         <label>TYP OLEJU</label>
                         <input  type="text" value={this.state.oilType} onChange={changeOilType}/>
 

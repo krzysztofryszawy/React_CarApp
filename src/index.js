@@ -8,7 +8,7 @@ import axios from './axios-instance';
 
 
 
-//globalna obsługa błędów
+//global error handling
 axios.interceptors.request.use(request => {
 //    console.log(request);
     return request;

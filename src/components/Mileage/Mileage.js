@@ -11,7 +11,7 @@ const mileage = (props) => {
             </div>
         )
 
-    if (props.active) { // wykonuje się gdy w state jest isActive=true, aktywuje komponent
+    if (props.active) { // is executed when state isActive=true
         mil = (
             <div  className={[classes.above, classes.Mileage].join(' ')}>
             <p> Przebieg samochodu: {props.currentMileage} km </p>

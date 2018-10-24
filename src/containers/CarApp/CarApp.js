@@ -55,7 +55,7 @@ class CarApp extends Component {
 
 
 
-// klikniecie komponentu aktywuje go
+// click on component makes it active and general flag as active - for backdrop launch
     switchActiveMileageHandler = () => this.setState({isActive:!this.state.isActive, isMileageActive:!this.state.isMileageActive})
 
 
@@ -73,7 +73,7 @@ class CarApp extends Component {
 
 
 
-//jsonName przekazany callbackiem z komponentu SelectCar
+//jsonName passed by callback from SelectCar component
     setCarHandler = (jsonName) => {
         if (this.state.databaseCarName!==jsonName) {
             this.setState({databaseCarName: jsonName}, this.loadCarHandler)
@@ -99,7 +99,7 @@ class CarApp extends Component {
     
     
     
-//przełącza między trybem wyboru auta i zarządzaniem
+//metod switching between choose car mode, or maintenance
     switchMaintenanceCarHandler = () => {
         this.setState({carSelecting: !this.state.carSelecting})
     }
@@ -123,6 +123,9 @@ class CarApp extends Component {
                 lastInsuranceDate: this.state.lastInsuranceDate,
                 lastAirconditionServiceDate: this.state.lastAirconditionServiceDate,
                 tires: this.state.tires,
+                showMileageComponent: this.state.showMileageComponent,
+                showInspectionComponent: this.state.showInspectionComponent,
+                showOilComponent: this.state.showOilComponent
             }
             
             this.setState({loading:true})
@@ -140,19 +143,17 @@ class CarApp extends Component {
 
     
     
-// ustawia nowy przebieg i wywoluje callback zapisujacy state do Firebase
+// setting new milleage and running callback, which patch state to Firebase
     setNewMileage = (newMileage) => {
         this.setState({mileage: newMileage,  editing:false}, this.updateCarHandler)
     }
 
-    
-// ustawia nową datę + nowy przebieg i wywoluje callback zapisujacy state do Firebase
+// setting new insp.date + milleage and running callback, which patch state to Firebase
     setNewInspection = (newInspectionDate, newMileage) => {
         this.setState({lastInspectionDate: newInspectionDate, mileage: newMileage,   editing:false}, this.updateCarHandler)
     }
     
-    
-//jeśli wprowadzony podczas wymiany oleju przebieg > aktualny to zapisujemy go jako aktualny i wywoluje callback zapisujacy state do Firebase
+//if oilchange mileage > current mileage then saving as actual and running callback, which patch state to Firebase
     setNewOil = (newOilDate, newMileage, newOilType) => {
         this.setState({lastOilChangeDate: newOilDate, lastOilChangeMileage: newMileage, oilType: newOilType, editing:false}, this.updateCarHandler)
         if (newMileage > this.state.mileage) {this.setState({mileage: newMileage}, this.updateCarHandler)}
@@ -164,7 +165,7 @@ class CarApp extends Component {
     
     
     
-//metoda przekazuje jaka będzie treść w Editor - nazwę komponentu
+//method is passing what will be displayed inside editor - component name
     changeMileageHandler = () => {
         this.setState(
                 {editing:!this.state.editing,
@@ -180,7 +181,7 @@ class CarApp extends Component {
     
     
     
-//metoda przekazuje jaka będzie treść w Editor - nazwę komponentu
+//method is passing what will be displayed inside editor - component name
     changeInspectionDateHandler = () => {
         this.setState(
                 {editing:!this.state.editing,
@@ -198,7 +199,7 @@ class CarApp extends Component {
 
     
     
-// metoda przekazuje jaka będzie treść w Editor - nazwę komponentu
+//method is passing what will be displayed inside editor - component name
     changeOilDateHandler = () => {
         this.setState(
                 {editing:!this.state.editing,
@@ -220,11 +221,11 @@ class CarApp extends Component {
     
    
         
-// ciemne tło nieaktywnych komponentów
+// dark background above inactive components
     let backdrop = <Backdrop show={this.state.isActive} clicked={() => 
                 this.setState({isActive:false, isInspectionActive:false, isMileageActive:false, isOilActive: false})}/>
     
-    
+// props passed to component
     let mileage = this.state.showMileageComponent ?  <Mileage 
                         click={this.switchActiveMileageHandler}
                         active={this.state.isMileageActive} 
@@ -248,22 +249,22 @@ class CarApp extends Component {
                         lastOilChangeDate={this.state.lastOilChangeDate}
                         lastOilChangeMileage={this.state.lastOilChangeMileage}/> : null
 
-    
+//button switching between choose car mode, or maintenance
     let switchAppButton = (
                     <div className={classes.confirmation} style={{height: '4em'}}>
                         <Button btnType='Proceed' clicked={this.switchMaintenanceCarHandler}> ⬅ WRÓĆ</Button>
                     </div>
                     )
     
-    //definicja okna dialogowego do edycji aktywnego komponentu
+//definition of component which (if set to active) takes content to edition 
     let editor = <Editor/>
-    if (this.state.editing) {
-        editor = (
-                <Editor show={this.state.editing}>
-                    {this.state.editorContent}
-                </Editor>
-            )
-    }
+        if (this.state.editing) {
+            editor = (
+                    <Editor show={this.state.editing}>
+                        {this.state.editorContent}
+                    </Editor>
+                )
+        }
         
         
     
@@ -276,9 +277,12 @@ class CarApp extends Component {
                                     <ul>
                                         <li>Option 1</li>
                                         <li>Option 2</li>
-                                        <Button btnType='Cancel' clicked={() => this.setState({showMileageComponent: !this.state.showMileageComponent})}> ↩ </Button>
-                                        <Button btnType='Cancel' clicked={() => this.setState({showInspectionComponent: !this.state.showInspectionComponent})}> ↩ </Button>
-                                        <Button btnType='Cancel' clicked={() => this.setState({showOilComponent: !this.state.showOilComponent})}> ↩ </Button>
+                                        <Button btnType='Cancel' 
+                                            clicked={() => this.setState({showMileageComponent: !this.state.showMileageComponent},this.updateCarHandler)}> ↩ </Button>
+                                        <Button btnType='Cancel' 
+                                            clicked={() => this.setState({showInspectionComponent: !this.state.showInspectionComponent},this.updateCarHandler)}> ↩ </Button>
+                                        <Button btnType='Cancel' 
+                                            clicked={() => this.setState({showOilComponent: !this.state.showOilComponent},this.updateCarHandler)}> ↩ </Button>
                                     </ul>
                                 </nav>
                             </header>
@@ -299,13 +303,13 @@ class CarApp extends Component {
                     </div>
     )
     
-//przełączanie miedzy dodawaniem samochodu a obsługą
+// contitional rendering depends on switch, displaying maintenance or car add
     if (this.state.carSelecting) {
         appContent = <SelectCar
                         setCarHandler={this.setCarHandler}/>
     }
     
-//obsługa błędu przy pobieraniu state przez loadCarHandler
+//error handler when geting data to state by loadCarHandler
     if (this.state.networkError) {
         appContent = <div style={{marginTop: '9vh', fontWeight: 'bold', cursor: 'pointer', height:'10vh', color:'red', textAlign: "center"}} onClick={() => this.setState({networkError: false, carSelecting: true})}>Network Error. Click to try again</div>
     }
@@ -314,7 +318,6 @@ class CarApp extends Component {
     if (this.state.loading) {
         appContent = <Spinner/>
     }
-        
         return (
             <div className={classes.CarApp}>
                 {appContent}

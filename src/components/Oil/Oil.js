@@ -40,7 +40,7 @@ const oil = (props) => {
         )
     }
     
-    if (props.active) { // wykonuje się gdy w state jest isActive=true, aktywuje komponent
+    if (props.active) { // is executed when state isActive=true
     
         if (currentMileage-lastOilChangeMileage >= 15000) {
         oilInsp = (

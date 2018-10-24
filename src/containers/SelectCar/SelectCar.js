@@ -6,12 +6,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './SelectCar.css'
 import CreateCar from './CreateCar/CreateCar'
 
-//let allCars = [
-//    {id: 'KR241RC', name: '/KR241RC.json'},
-//    {id: 'KR242RC', name: '/KR242RC.json'},
-//    {id: 'KR243RC', name: '/KR243RC.json'},
-//    {id: 'KR244RC', name: '/KR244RC.json'},
-//]
 
 
 
@@ -47,7 +41,7 @@ class selectCar extends Component {
     }
 
 
-// jeśli reloadTrigger ustawił shouldReload:true to wczytujemy nową bazę
+// if reloadTrigger setted shouldReload:true, it means the database is updated and need reloading
     componentDidUpdate () {
         if (this.state.shouldReload) {
                 this.componentIsMounted = true;
@@ -70,7 +64,7 @@ class selectCar extends Component {
     let createCar
     let button
     
-// wczytujemy nową bazę tylko jeśli dodano nowy obiekt do bazy - callback w CreateCar
+// callback in CreateCar component => setting if reloading database is necessary, only when new object is inserted (passed by parameter decision)
     let reloadTrigger = (decision) => {
         if (decision) {
             this.setState({shouldReload:true})

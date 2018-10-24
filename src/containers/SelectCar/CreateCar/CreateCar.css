@@ -1,6 +1,6 @@
 .createCarclass {
     display:grid;
-    grid-row-gap: 1em;
+    grid-row-gap: .5em;
     background-color: ghostwhite;
     margin-top: 2em;
 }

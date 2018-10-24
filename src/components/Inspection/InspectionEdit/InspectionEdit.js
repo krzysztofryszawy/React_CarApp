@@ -34,7 +34,8 @@ class InspectionEdit extends Component {
                         <h3>Edycja - badanie techniczne</h3>
                         
                         <label>Zarejestruj nowy przegląd techniczny, wprowadź datę jego wykonania</label>
-                          <input type="date" value={this.state.newInspectionDate} onChange={changeInspectionDate} min={this.props.lastInspectionDate} required/>
+                        <input type="date" value={this.state.newInspectionDate} onChange={changeInspectionDate} min={this.props.lastInspectionDate} required/>
+                        
                         <label>Warto także wprowadzić aktualny przebieg pojazdu (nieobowiązkowe)</label>
                         <input  type="number" step="1" name="przebieg" min={this.props.currentMileage} value={this.state.currentMileage} onChange={changeMileage}/>
                    

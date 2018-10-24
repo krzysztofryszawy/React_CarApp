@@ -9,6 +9,8 @@
     margin-top: 2em;
     border: 2px solid black;
     box-shadow: 10px 10px 30px 5px rgba(0,0,0,0.9);
+    border-radius: 15px;
+    padding-top: 15px;
     
 }
 
@@ -52,6 +54,9 @@ p {
     .CarApp {
         width: 100%;
         margin: 0;
-        font-size: .7em
+        font-size: .7em;
+        border-radius: 0;
+        padding-top: 0;
+
     }
 }

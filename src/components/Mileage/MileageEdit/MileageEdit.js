@@ -18,7 +18,7 @@ class MileageEdit extends Component {
             this.setState({currentMileage: Number(e.target.value)})
         }
 
-//USUNĄĆ NADMIAROWA METODA!!!
+//USUNĄĆ NADMIAROWA METODA!!! (to remove)
         const sendNewData = () => {
             this.props.confirm(this.state.currentMileage)
         }
